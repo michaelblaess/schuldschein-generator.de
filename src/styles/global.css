@@ -110,6 +110,7 @@
 
   .inhalt-haupt { padding-top: 28px; padding-bottom: 48px; }
   .seite-titel { font-size: clamp(34px, 6vw, 48px); line-height: 1.02; margin: 0 0 10px; font-weight: 700; letter-spacing: -.01em; }
+  .vorzeile { font: 500 15px var(--font-mono); color: var(--rot); margin: 0 0 8px; }
   .lead { margin: 0 0 18px; color: var(--lead); max-width: 80ch; }
   .lead .zeile { display: block; }
   .stand { font: 500 15px var(--font-mono); color: var(--grau); margin: 0 0 18px; }

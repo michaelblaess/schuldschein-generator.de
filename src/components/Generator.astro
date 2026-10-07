@@ -13,6 +13,7 @@ const g = GT[sprache];
 const verzug = BASISZINS.verzug.toLocaleString(sprache === 'de' ? 'de-DE' : 'en-GB');
 const start = erzeugeVertrag(leereAngaben(), 'kompakt', sprache);
 ---
+<p class="vorzeile nicht-drucken">{g.claim}</p>
 <h1 class="seite-titel nicht-drucken">{g.titel}</h1>
 <p class="lead nicht-drucken"><span class="zeile">{g.lead}</span> <span class="zeile">{g.leadZwei}</span></p>
 <div class="haftung gross nicht-drucken" role="note">

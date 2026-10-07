@@ -10,7 +10,7 @@ const { sprache } = Astro.props;
 const de = sprache === 'de';
 const T = de
   ? {
-      titel: 'Was das Gesetz sagt',
+      titel: 'Schuldschein und Privatdarlehen: was das Gesetz sagt',
       stand: `Stand: ${STAND}, alle Quellen an diesem Tag geprüft`,
       haftung: 'Das hier ist eine Zusammenfassung zum Nachlesen. Urteile betreffen immer einen Einzelfall.',
       kurz: 'Das Wichtigste in Kürze',
@@ -25,7 +25,7 @@ const T = de
       quelle: 'Bundesgerichte über das amtliche Portal rechtsinformationen.bund.de (Testphase), Oberlandesgerichte NRW über nrwe.justiz.nrw.de.',
     }
   : {
-      titel: 'What German law says',
+      titel: 'Promissory notes and private loans: what German law says',
       stand: `As of ${STAND}, all sources checked on that day`,
       haftung: 'This is a summary for reference. Court decisions always concern an individual case.',
       kurz: 'The essentials',

@@ -3,8 +3,9 @@ import type { Sprache } from './i18n';
 /** Texte des Generators, im Formular und im Skript gleichermassen genutzt. */
 export const GT = {
   de: {
-    titel: 'Geld verleihen - aber richtig',
-    lead: 'Schuldschein für ein Darlehen nach §§ 488 ff. BGB, komplett in Deinem Browser erstellt.',
+    claim: 'Geld verleihen - aber richtig',
+    titel: 'Schuldschein für Dein Privatdarlehen',
+    lead: 'Kostenlose Vorlage für ein Darlehen nach §§ 488 ff. BGB, komplett in Deinem Browser ausgefüllt.',
     leadZwei: 'Was Du einträgst, verlässt Dein Gerät nicht.',
     kopfLinks: 'Darlehen unter Privatleuten',
     kopfRechts: 'Pflichtangaben',
@@ -92,8 +93,9 @@ export const GT = {
     datei: 'Schuldschein',
   },
   en: {
-    titel: 'Lend money - the right way',
-    lead: 'A promissory note for a loan under §§ 488 ff. of the German Civil Code, created entirely in your browser.',
+    claim: 'Lend money - the right way',
+    titel: 'A promissory note for your private loan',
+    lead: 'A free template for a loan under §§ 488 ff. of the German Civil Code, filled in entirely in your browser.',
     leadZwei: 'Nothing you enter leaves your device.',
     kopfLinks: 'Loan between private individuals',
     kopfRechts: 'Required',
