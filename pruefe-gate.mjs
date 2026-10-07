@@ -209,11 +209,49 @@ async function main() {
     pruefe('hreflang gesetzt', ohneHreflang.length === 0, ohneHreflang.join(', '));
     pruefe('hreflang x-default gesetzt', ohneXDefault.length === 0, ohneXDefault.join(', '));
   }
-  pruefe('Teilervorschau (og:title und og:image)', ohneTeiler.length === 0, ohneTeiler.join(', '));
+  if (ausnahmen.ogImage) {
+    pruefe('Teilervorschau (Ausnahme)', typeof ausnahmen.ogImage === 'string' && ausnahmen.ogImage.length > 10, ausnahmen.ogImage);
+  } else {
+    pruefe('Teilervorschau (og:title und og:image)', ohneTeiler.length === 0, ohneTeiler.join(', '));
+  }
+
+  // --- Strukturierte Daten -------------------------------------------------
+  // Die Startseite jeder Sprache sagt maschinenlesbar, was sie ist (schema.org
+  // als JSON-LD). Welcher Typ passt, entscheidet das Projekt: WebApplication
+  // fuer ein Werkzeug, WebSite oder Person fuer eine Inhaltsseite. Geprueft
+  // wird nur, dass ein Block da ist, sich lesen laesst und einen Typ nennt.
+  if (ausnahmen.jsonLd) {
+    pruefe('Strukturierte Daten (Ausnahme)', typeof ausnahmen.jsonLd === 'string' && ausnahmen.jsonLd.length > 10, ausnahmen.jsonLd);
+  } else {
+    const startrouten = sprachen.length > 0
+      ? sprachen.map(([, prefix]) => (prefix ? `/${prefix}/` : '/'))
+      : ['/'];
+    const ohneDaten = startrouten.filter((r) => {
+      const start = seiten.find((s) => s.route === r);
+      if (!start) return true;
+      const bloecke = [...start.html.matchAll(/<script[^>]+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)];
+      return !bloecke.some(([, text]) => {
+        try {
+          const daten = JSON.parse(text);
+          const eintraege = Array.isArray(daten) ? daten : (daten['@graph'] ?? [daten]);
+          return eintraege.some((e) => e && e['@type']);
+        } catch {
+          return false;
+        }
+      });
+    });
+    pruefe('Strukturierte Daten auf der Startseite (JSON-LD)', ohneDaten.length === 0, ohneDaten.join(', '));
+  }
 
   // --- Pflichtbausteine im Markup ----------------------------------------
-  const ohneToggle = seiten.filter((s) => !s.html.includes(konfig.themeToggleKennung ?? 'data-theme-toggle'));
-  pruefe('Hell/Dunkel-Umschalter', ohneToggle.length === 0, ohneToggle.map((s) => s.route).join(', '));
+  // Eine Seite mit nur einer Optik (etwa ein Retro-Design auf Schwarz) schaltet
+  // die Pruefung mit Begruendung ab - dieselbe Regel wie bei DMARC.
+  if (ausnahmen.themeToggle) {
+    pruefe('Hell/Dunkel-Umschalter (Ausnahme)', typeof ausnahmen.themeToggle === 'string' && ausnahmen.themeToggle.length > 10, ausnahmen.themeToggle);
+  } else {
+    const ohneToggle = seiten.filter((s) => !s.html.includes(konfig.themeToggleKennung ?? 'data-theme-toggle'));
+    pruefe('Hell/Dunkel-Umschalter', ohneToggle.length === 0, ohneToggle.map((s) => s.route).join(', '));
+  }
 
   if (konfig.copyright) {
     const kern = konfig.copyright.slice(0, 24);
