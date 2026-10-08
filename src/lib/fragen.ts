@@ -29,6 +29,7 @@ export const FRAGEN: Record<Sprache, Gruppe[]> = {
       titel: 'Vor dem Unterschreiben',
       fragen: [
         { frage: 'Muss der Schuldschein zum Notar?', antwort: 'Nein. Für ein Darlehen unter Privatleuten schreibt das Gesetz keine Form vor.', link: { seite: 'rechtslage', anker: 'form', text: 'Form und Unterschrift' } },
+        { frage: 'Ist ein Schuldschein dasselbe wie ein Darlehensvertrag?', antwort: 'Nicht ganz. Der Darlehensvertrag ist die Vereinbarung selbst: Eine Seite gibt Geld, die andere zahlt es zurück. Der Schuldschein ist die Urkunde über diese Schuld. Im Alltag meinen beide Wörter meist dasselbe Blatt Papier. Was Du hier ausfüllst, hält die Vereinbarung fest und wird am besten von beiden unterschrieben.', grundlage: '§ 488 BGB, § 371 BGB' },
         { frage: 'Reicht es, das PDF per Mail zu schicken?', antwort: 'Nein. Druckt ihn aus und unterschreibt ihn beide von Hand. Nur eine unterschriebene Urkunde beweist vor Gericht voll. Für ein Schuldanerkenntnis ist die elektronische Form sogar ausdrücklich ausgeschlossen.', grundlage: '§ 416 ZPO, § 781 BGB' },
         { frage: 'Wer muss unterschreiben?', antwort: 'Mindestens die Person, die sich das Geld leiht. Besser unterschreibt Ihr beide, und zwar auf zwei Exemplaren, eines für jede Seite.' },
         { frage: 'Bar oder per Überweisung?', antwort: 'Überweisung ist leichter nachzuweisen. In einem Fall vor dem OLG Köln genügte eine Überweisung kurz nach dem Vertrag als Beweis, obwohl im Verwendungszweck nicht "Darlehen" stand.', grundlage: 'OLG Köln, 16 U 106/16' },
@@ -70,6 +71,7 @@ export const FRAGEN: Record<Sprache, Gruppe[]> = {
       titel: 'Before signing',
       fragen: [
         { frage: 'Does the promissory note need a notary?', antwort: 'No. German law prescribes no form for a loan between private individuals.', link: { seite: 'rechtslage', anker: 'form', text: 'Form and signature' } },
+        { frage: 'Is a promissory note the same as a loan agreement?', antwort: 'Not quite. The loan agreement is the arrangement itself: one side hands over money, the other pays it back. The promissory note (Schuldschein) is the document recording that debt. In everyday use both words usually mean the same sheet of paper. What you fill in here records the arrangement and is best signed by both.', grundlage: '§ 488 BGB, § 371 BGB' },
         { frage: 'Is it enough to send the PDF by email?', antwort: 'No. Print it and both sign it by hand. Only a signed document is full evidence in court. For an acknowledgement of debt, electronic form is even expressly excluded.', grundlage: '§ 416 ZPO, § 781 BGB' },
         { frage: 'Who has to sign?', antwort: 'At least the person borrowing the money. Better still, you both sign, on two copies, one for each of you.' },
         { frage: 'Cash or bank transfer?', antwort: 'A transfer is easier to prove. In one case before the Higher Regional Court Cologne, a transfer shortly after the agreement was enough as proof, even though the reference did not say "loan".', grundlage: 'OLG Köln, 16 U 106/16' },
