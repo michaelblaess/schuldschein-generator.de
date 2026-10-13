@@ -34,7 +34,7 @@ function leseZins(eingabe: string): number | null | 'fehler' {
   if (!eingabe) {
     return null;
   }
-  const zahl = Number(eingabe.replace(',', '.').replace('%', '').trim());
+  const zahl = Number(eingabe.replace(/,/g, '.').replace(/%/g, '').trim());
   return Number.isFinite(zahl) && zahl >= 0 && zahl < 100 ? zahl : 'fehler';
 }
 

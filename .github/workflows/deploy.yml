@@ -11,6 +11,10 @@ on:
         type: boolean
         default: false
 
+# Der Lauf liest nur den Quelltext, hochgeladen wird per FTPS und nicht ueber das Token
+permissions:
+  contents: read
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
