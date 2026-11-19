@@ -2,7 +2,7 @@ export type Sprache = 'de' | 'en';
 
 export const SPRACHEN: Sprache[] = ['de', 'en'];
 
-export type SeitenSchluessel = 'start' | 'vorlagen' | 'rechtslage' | 'fragen' | 'ueber' | 'impressum' | 'datenschutz' | 'nutzung';
+export type SeitenSchluessel = 'start' | 'vorlagen' | 'rechtslage' | 'fragen' | 'ueber' | 'impressum' | 'datenschutz' | 'nutzung' | 'feedback';
 
 /** Adresse jeder Seite je Sprache. Die Sprache haengt an der Adresse, nicht an einem Speicher. */
 export const PFADE: Record<SeitenSchluessel, Record<Sprache, string>> = {
@@ -14,6 +14,7 @@ export const PFADE: Record<SeitenSchluessel, Record<Sprache, string>> = {
   impressum: { de: '/impressum/', en: '/en/legal-notice/' },
   datenschutz: { de: '/datenschutz/', en: '/en/privacy/' },
   nutzung: { de: '/nutzungsbedingungen/', en: '/en/terms/' },
+  feedback: { de: '/feedback/', en: '/en/feedback/' },
 };
 
 export const DOMAIN = 'https://schuldschein-generator.de';
@@ -35,6 +36,7 @@ const TEXTE = {
     'fuss.impressum': 'Impressum',
     'fuss.datenschutz': 'Datenschutz',
     'fuss.nutzung': 'Nutzungsbedingungen',
+    'fuss.feedback': 'Feedback',
     'fuss.quellcode': 'Quellcode auf GitHub',
     'fuss.ueber': 'Über das Projekt',
     'consent.widerrufen': 'Cookie-Einstellungen',
@@ -42,12 +44,12 @@ const TEXTE = {
     'haftung.lang': 'Der Vertrag passt für einfache Fälle unter Privatleuten. Bei hohen Beträgen, Sicherheiten oder Streit: lass ihn von einer Anwältin oder einem Anwalt prüfen.',
     'skip': 'Zum Inhalt springen',
     'consent.titel': 'Statistik erlauben?',
-    'consent.text': 'Diese Seite misst mit Google Analytics, welche Seiten besucht und welche Dateien heruntergeladen oder gedruckt werden. Was Du in das Formular einträgst, erfährt Google nie. Ohne Deine Zustimmung wird nichts davon geladen und kein Cookie gesetzt. Du kannst die Entscheidung jederzeit unten auf jeder Seite ändern.',
+    'consent.text': 'Diese Seite misst mit Google Analytics, welche Seiten besucht und welche Dateien heruntergeladen oder gedruckt werden. Was Du in den Generator einträgst, erfährt Google nie. Ohne Deine Zustimmung wird Google Analytics nicht geladen und kein Cookie dafür gesetzt. Nur das Feedback-Formular lädt beim ersten Klick Google reCAPTCHA gegen Spam. Du kannst die Entscheidung jederzeit unten auf jeder Seite ändern.',
     'consent.ja': 'Einverstanden',
     'consent.nein': 'Nur das Nötigste',
     'consent.details': 'Einstellungen',
     'consent.einstellungen.titel': 'Was gemessen wird',
-    'consent.einstellungen.text': 'Es gibt keine Werbung, keine Weitergabe an Dritte und keine Profile. Gemessen wird nur, welche Seiten aufgerufen werden. Formularinhalte werden nie übertragen.',
+    'consent.einstellungen.text': 'Es gibt keine Werbung, keine Weitergabe der Messdaten an weitere Dritte und keine Profile. Gemessen wird nur, welche Seiten aufgerufen werden. Was Du in den Generator einträgst, wird nie übertragen.',
     'consent.speichern': 'Auswahl speichern',
     'consent.notwendig.titel': 'Notwendig',
     'consent.notwendig.text': 'Deine Entscheidung über diesen Hinweis. Sie bleibt in Deinem Browser und wird nicht übertragen.',
@@ -73,6 +75,7 @@ const TEXTE = {
     'fuss.impressum': 'Legal notice',
     'fuss.datenschutz': 'Privacy',
     'fuss.nutzung': 'Terms of use',
+    'fuss.feedback': 'Feedback',
     'fuss.quellcode': 'Source code on GitHub',
     'fuss.ueber': 'About',
     'consent.widerrufen': 'Cookie settings',
@@ -80,12 +83,12 @@ const TEXTE = {
     'haftung.lang': 'The agreement suits simple cases between private individuals. For large amounts, collateral or an existing dispute, have it checked by a lawyer.',
     'skip': 'Skip to content',
     'consent.titel': 'Allow statistics?',
-    'consent.text': 'This site uses Google Analytics to see which pages are visited and which files are downloaded or printed. Google never learns what you type into the form. Without your consent none of it is loaded and no cookie is set. You can change your mind at any time at the bottom of every page.',
+    'consent.text': 'This site uses Google Analytics to see which pages are visited and which files are downloaded or printed. Google never learns what you type into the generator. Without your consent Google Analytics is not loaded and no cookie is set for it. Only the feedback form loads Google reCAPTCHA against spam on your first click. You can change your mind at any time at the bottom of every page.',
     'consent.ja': 'I agree',
     'consent.nein': 'Essentials only',
     'consent.details': 'Settings',
     'consent.einstellungen.titel': 'What is measured',
-    'consent.einstellungen.text': 'There is no advertising, no sharing with third parties and no profiling. The only thing measured is which pages are opened. Form contents are never transmitted.',
+    'consent.einstellungen.text': 'There is no advertising, no sharing of the measurement data with further third parties and no profiling. The only thing measured is which pages are opened. What you enter in the generator is never transmitted.',
     'consent.speichern': 'Save choice',
     'consent.notwendig.titel': 'Essential',
     'consent.notwendig.text': 'Your choice about this notice. It stays in your browser and is never transmitted.',

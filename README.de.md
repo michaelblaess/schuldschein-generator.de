@@ -30,7 +30,7 @@ Live unter **[schuldschein-generator.de](https://schuldschein-generator.de)**, a
 - **Rechtslage**: Gesetz nach Themen und 12 Urteile, jedes am 18.09.2026 im Volltext geprüft, mit Aktenzeichen und Link.
 - **Häufige Fragen** mit der Grundlage jeder Antwort, zusätzlich als strukturierte Daten.
 - **Hell und dunkel**, folgt dem System, bis Du wählst.
-- **Datenschutz durch Bauart:** Eingaben werden nur mit dem Häkchen "merken" gespeichert, das Design erst nach Klick auf den Schalter, die Sprache steckt in der Adresse. Google Analytics wird nur mit Mess-Kennung eingebaut und lädt erst nach Einwilligung.
+- **Datenschutz durch Bauart:** Eingaben werden nur mit dem Häkchen "merken" gespeichert, das Design erst nach Klick auf den Schalter, die Sprache steckt in der Adresse. Google Analytics wird nur mit Mess-Kennung eingebaut und lädt erst nach Einwilligung. Google reCAPTCHA lädt nur auf der Feedback-Seite und erst beim ersten Klick ins Formular.
 
 ## Bildschirmfotos
 
@@ -54,6 +54,12 @@ tests/          vitest für die reinen Funktionen
 tools/          Smoketest, Barrierefreiheit, Erzeugung von Icons und Teilerbild
 docs/           Designentwürfe, Codeprüfung der alten Fassung, Rechtsrecherche
 ```
+
+## Feedback
+
+Unter `/feedback/` können Besucher Lob, Fehler und Vorschläge hinterlassen. Das Formular in diesem Repo schickt die Einträge an einen eigenen Dienst unter `feedback.michaelblaess.de`, der auch die Feedback-Formulare zweier weiterer Seiten bedient. Dessen Quellcode ist bewusst nicht öffentlich. Der Grund ist der Spamschutz: Wer die Regeln kennt, nach denen ein Eintrag angenommen, markiert oder verworfen wird, kann sie gezielt umgehen. Deshalb stehen hier weder die Regeln noch ihre Grenzwerte.
+
+Öffentlich sind nur das Formular und die Anzeige der freigegebenen Einträge. Zusätzlich schützt Google reCAPTCHA v3 das Formular. Es lädt erst beim ersten Klick ins Formular, nie beim bloßen Aufruf einer Seite. Was gespeichert wird und wie lange, steht in der Datenschutzerklärung der Seite.
 
 ## Entwicklung
 

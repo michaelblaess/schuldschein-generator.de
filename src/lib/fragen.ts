@@ -60,7 +60,7 @@ export const FRAGEN: Record<Sprache, Gruppe[]> = {
       titel: 'Zu dieser Seite',
       fragen: [
         { frage: 'Werden meine Eingaben gespeichert?', antwort: 'Nur wenn Du das Häkchen "Eingaben auf diesem Gerät merken" setzt, und dann nur in Deinem Browser. An uns oder Dritte werden sie nie geschickt. Mit "Formular leeren" löschst Du sie.' },
-        { frage: 'Was erfährt Google Analytics?', antwort: 'Nur wenn Du Statistik erlaubst: welche Seiten besucht und welche Vorlagen heruntergeladen wurden und ob ein Schuldschein als PDF gespeichert oder gedruckt wurde. Was Du einträgst, erfährt Google nie. Ohne Zustimmung wird Google gar nicht erst geladen.' },
+        { frage: 'Was erfährt Google Analytics?', antwort: 'Nur wenn Du Statistik erlaubst: welche Seiten besucht und welche Vorlagen heruntergeladen wurden und ob ein Schuldschein als PDF gespeichert oder gedruckt wurde. Was Du in den Generator einträgst, erfährt Google nie. Ohne Zustimmung wird Google Analytics gar nicht erst geladen. Davon getrennt lädt nur das Feedback-Formular beim ersten Klick Google reCAPTCHA gegen Spam.' },
         { frage: 'Kostet das etwas?', antwort: 'Nein. Generator und Vorlagen sind kostenlos und ohne Anmeldung.' },
         { frage: 'Ist der Vertrag rechtssicher?', antwort: 'Das kann kein Generator versprechen. Der Vertrag deckt einfache Fälle ab. Bei hohen Beträgen, Sicherheiten oder Streit lass ihn von einer Anwältin oder einem Anwalt prüfen.' },
       ],
@@ -102,7 +102,7 @@ export const FRAGEN: Record<Sprache, Gruppe[]> = {
       titel: 'About this site',
       fragen: [
         { frage: 'Are my entries stored?', antwort: 'Only if you tick "Remember my entries on this device", and then only in your browser. They are never sent to us or anyone else. "Clear form" deletes them.' },
-        { frage: 'What does Google Analytics learn?', antwort: 'Only if you allow statistics: which pages were visited, which templates were downloaded and whether a promissory note was saved as PDF or printed. Google never learns what you enter. Without consent, Google is not loaded at all.' },
+        { frage: 'What does Google Analytics learn?', antwort: 'Only if you allow statistics: which pages were visited, which templates were downloaded and whether a promissory note was saved as PDF or printed. Google never learns what you enter in the generator. Without consent, Google Analytics is not loaded at all. Separately, only the feedback form loads Google reCAPTCHA against spam on your first click.' },
         { frage: 'Does it cost anything?', antwort: 'No. The generator and the templates are free and need no sign-up.' },
         { frage: 'Is the agreement legally watertight?', antwort: 'No generator can promise that. The agreement covers simple cases. For large amounts, collateral or a dispute, have it checked by a lawyer.' },
       ],

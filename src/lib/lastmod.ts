@@ -13,6 +13,7 @@ const QUELLEN: Record<SeitenSchluessel, string[]> = {
   impressum: ['src/pages/impressum', 'src/pages/en/legal-notice', 'src/lib/recht.ts'],
   datenschutz: ['src/pages/datenschutz', 'src/pages/en/privacy', 'src/lib/recht.ts'],
   nutzung: ['src/pages/nutzungsbedingungen', 'src/pages/en/terms', 'src/lib/recht.ts'],
+  feedback: ['src/pages/feedback', 'src/pages/en/feedback', 'src/components/FeedbackSeite.astro', 'src/lib/feedback.ts', 'src/scripts/feedback.ts'],
 };
 
 /**

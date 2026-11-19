@@ -21,15 +21,52 @@ const pruefe = (ok, text) => {
 
 const browser = await chromium.launch({ executablePath: exe });
 const kontext = await browser.newContext({ locale: 'de-DE', acceptDownloads: true });
+// Der Feedback-Dienst ist der einzige erlaubte fremde Host. Im Test antwortet er nie echt,
+// sondern ueber diese Attrappe, damit kein Lauf Eintraege oder Stempel beim Dienst erzeugt.
+const FEEDBACK_HOST = 'feedback.michaelblaess.de';
+const anDienst = [];
+const gesendet = [];
+let sendeAntwort = { status: 200, body: { ok: true, ergebnis: 'gesendet' } };
+await kontext.route(`https://${FEEDBACK_HOST}/**`, async (route) => {
+  const r = route.request();
+  const url = new URL(r.url());
+  anDienst.push(url.pathname);
+  const json = (status, body) => route.fulfill({ status, contentType: 'application/json', headers: { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'Content-Type' }, body: JSON.stringify(body) });
+  if (r.method() === 'OPTIONS') {
+    return route.fulfill({ status: 204, headers: { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST', 'Access-Control-Allow-Headers': 'Content-Type' } });
+  }
+  if (url.pathname === '/api/stempel.php') {
+    return json(200, { ok: true, stempel: 'test-stempel' });
+  }
+  if (url.pathname === '/api/oeffentlich.php') {
+    return json(200, { ok: true, eintraege: [{ id: 1, datum: '2026-11-18', sprache: 'de', art: 'lob', text: 'Gut <img src=x onerror="window.__xss2=1">', name: 'Anna' }] });
+  }
+  if (url.pathname === '/api/feedback.php') {
+    gesendet.push(r.postDataJSON());
+    return json(sendeAntwort.status, sendeAntwort.body);
+  }
+  return json(404, { ok: false });
+});
+// reCAPTCHA: nur mit Site-Key und erst nach dem Fokus. Der Stub ersetzt Googles Skript,
+// damit kein Lauf Google erreicht. Ohne Key darf ueberhaupt keine Anfrage an Google gehen.
+const RECAPTCHA_HOSTS = ['www.google.com', 'www.gstatic.com'];
+const anGoogle = [];
+await kontext.route(/^https:\/\/(www\.google\.com|www\.gstatic\.com)\//, (route) => {
+  anGoogle.push(route.request().url());
+  return route.fulfill({ status: 200, contentType: 'text/javascript',
+    body: "window.grecaptcha = { ready: (f) => f(), execute: () => Promise.resolve('test-token') };" });
+});
 const seite = await kontext.newPage();
 const konsole = [];
 const fremd = [];
 seite.on('pageerror', (e) => konsole.push(e.message));
-seite.on('console', (m) => m.type() === 'error' && konsole.push(m.text()));
+// Der absichtlich provozierte 422 des Feedback-Dienstes landet als Netzfehler in der Konsole
+let erwarte422 = false;
+seite.on('console', (m) => m.type() === 'error' && !(erwarte422 && m.text().includes('status of 422')) && konsole.push(m.text()));
 seite.on('request', (r) => {
   const url = new URL(r.url());
   // Eigener Host zaehlt nicht als fremd, sonst schlaegt die Pruefung gegen die Live-Seite falsch an
-  if (url.hostname !== new URL(basis).hostname &&!url.protocol.startsWith('data') && !url.protocol.startsWith('blob')) {
+  if (url.hostname !== new URL(basis).hostname && url.hostname !== FEEDBACK_HOST && !RECAPTCHA_HOSTS.includes(url.hostname) && !url.protocol.startsWith('data') && !url.protocol.startsWith('blob')) {
     fremd.push(r.url());
   }
 });
@@ -101,7 +138,7 @@ pruefe((await seite.locator('#dokument .blatt').innerText()).includes('in words:
 
 // Jede Seite laedt, der Weg ins Impressum ist ein Klick
 for (const p of ['/vorlagen/', '/rechtslage/', '/fragen/', '/impressum/', '/datenschutz/', '/nutzungsbedingungen/',
-  '/ueber/', '/en/templates/', '/en/law/', '/en/faq/', '/en/about/', '/en/legal-notice/', '/en/privacy/', '/en/terms/']) {
+  '/ueber/', '/en/templates/', '/en/law/', '/en/faq/', '/en/about/', '/en/legal-notice/', '/en/privacy/', '/en/terms/', '/feedback/', '/en/feedback/']) {
   const antwort = await seite.goto(`${basis}${p}`, { waitUntil: 'networkidle' });
   pruefe(antwort?.status() === 200, `${p} liefert 200`);
 }
@@ -128,6 +165,72 @@ await seite.goto(`${basis}/vorlagen/`, { waitUntil: 'networkidle' });
 const bunt = await seite.evaluate(() => [...document.querySelectorAll('.mini .blatt .linie')]
   .filter((el) => getComputedStyle(el).backgroundColor !== 'rgba(0, 0, 0, 0)').length);
 pruefe(bunt === 0, `Schreiblinien der Vorlagen ohne Hintergrund (${bunt} eingefärbt)`);
+
+// Feedback ohne Site-Key: der Key wird fuer diesen Teil im ausgelieferten HTML geleert,
+// damit der Fall "kein reCAPTCHA" geprueft bleibt, obwohl der echte Key gesetzt ist
+await seite.route(`${basis}/feedback/`, async (route) => {
+  const antwortHtml = await route.fetch();
+  const html = (await antwortHtml.text()).replace(/data-recaptcha(?:="[^"]*")?(?=[\s>])/, 'data-recaptcha=""');
+  await route.fulfill({ response: antwortHtml, body: html });
+});
+anGoogle.length = 0;
+
+// Feedback: vor dem ersten Fokus geht nur die Liste an den Dienst, kein Stempel
+anDienst.length = 0;
+await seite.goto(`${basis}/feedback/`, { waitUntil: 'networkidle' });
+pruefe(anDienst.length === 1 && anDienst[0] === '/api/oeffentlich.php', `vor dem Fokus nur die Liste vom Dienst (${anDienst.join(', ')})`);
+pruefe((await seite.locator('#eintraege-liste li').count()) === 1, 'freigegebener Eintrag in der Liste');
+pruefe((await seite.locator('#eintraege-liste li p').innerText()).includes('<img'), 'Eintrag erscheint als Text');
+pruefe(!(await seite.evaluate(() => window.__xss2)), 'Eintrag wird nicht als HTML ausgeführt');
+await seite.click('#fb-senden');
+pruefe(await seite.locator('#fb-text-fehler').isVisible() && (await seite.getAttribute('#fb-text', 'aria-invalid')) === 'true', 'leeres Feedback zeigt den Textfehler');
+pruefe(gesendet.length === 0, 'ungültiges Feedback geht nicht an den Dienst');
+pruefe(anDienst.includes('/api/stempel.php'), 'Stempel nach dem ersten Fokus geholt');
+await seite.locator('#fb-art label', { hasText: 'Fehler' }).click();
+await seite.fill('#fb-text', 'Ein Test aus dem Smoketest.');
+pruefe(await seite.isChecked('#fb-oeffentlich input[value="nein"]'), 'Veröffentlichen steht ohne Zutun auf Nein');
+sendeAntwort = { status: 422, body: { ok: false, ergebnis: 'ungueltig', fehler: 'textlaenge' } };
+erwarte422 = true;
+await seite.click('#fb-senden');
+await seite.locator('#fb-text-fehler').waitFor({ state: 'visible' });
+await seite.waitForTimeout(200);
+erwarte422 = false;
+pruefe((await seite.getAttribute('#fb-text', 'aria-invalid')) === 'true', '422 textlaenge markiert das Textfeld');
+sendeAntwort = { status: 200, body: { ok: true, ergebnis: 'gesendet' } };
+await seite.locator('#fb-oeffentlich label', { hasText: 'Ja' }).click();
+await seite.click('#fb-senden');
+await seite.locator('#fb-meldung[data-art="ok"]').waitFor({ state: 'visible' });
+const letzte = gesendet.at(-1) ?? {};
+pruefe(letzte.site === 'schuldschein-generator.de' && letzte.art === 'fehler' && letzte.oeffentlich === 'ja' && letzte.stempel === 'test-stempel' && letzte.webseite === '' && !('recaptcha' in letzte),
+  `Feedback mit allen Feldern gesendet (${JSON.stringify(letzte).slice(0, 120)})`);
+pruefe((await seite.inputValue('#fb-text')) === '', 'Formular nach dem Senden geleert');
+pruefe(await seite.isChecked('#fb-oeffentlich input[value="nein"]'), 'nach dem Senden steht Veröffentlichen wieder auf Nein');
+pruefe(anGoogle.length === 0, `ohne Site-Key keine Anfrage an Google (${anGoogle.length})`);
+pruefe(!(await seite.locator('.recaptcha-hinweis').isVisible()), 'ohne Site-Key kein reCAPTCHA-Hinweis');
+
+// Mit Test-Key: der Key wird nur fuer diesen Test in das ausgelieferte HTML geschrieben
+await seite.unroute(`${basis}/feedback/`);
+await seite.route(`${basis}/feedback/`, async (route) => {
+  const antwortHtml = await route.fetch();
+  const html = (await antwortHtml.text()).replace(/data-recaptcha(?:="[^"]*")?(?=[\s>])/, 'data-recaptcha="test-key"');
+  await route.fulfill({ response: antwortHtml, body: html });
+});
+anGoogle.length = 0;
+await seite.goto(`${basis}/feedback/`, { waitUntil: 'networkidle' });
+pruefe(anGoogle.length === 0, 'mit Site-Key vor dem Fokus keine Anfrage an Google');
+pruefe(await seite.locator('.recaptcha-hinweis').isVisible(), 'mit Site-Key steht der Pflichttext unter dem Knopf');
+await seite.locator('#fb-art label', { hasText: 'Lob' }).click();
+await seite.waitForLoadState('networkidle');
+pruefe(anGoogle.some((u) => u.includes('/recaptcha/api.js?render=test-key')), 'nach dem Fokus api.js mit Site-Key geladen');
+await seite.fill('#fb-text', 'Ein Test mit reCAPTCHA-Token.');
+await seite.click('#fb-senden');
+await seite.locator('#fb-meldung[data-art="ok"]').waitFor({ state: 'visible' });
+pruefe(gesendet.at(-1)?.recaptcha === 'test-token', `Token im JSON (${gesendet.at(-1)?.recaptcha})`);
+pruefe((await seite.locator('script[src*="recaptcha/api.js"]').count()) === 1, 'reCAPTCHA-Skript genau einmal eingebunden');
+await seite.unroute(`${basis}/feedback/`);
+
+await seite.goto(`${basis}/en/feedback/?feedback=zu-viele#feedback`, { waitUntil: 'networkidle' });
+pruefe((await seite.locator('#fb-meldung').innerText()).startsWith('Too many'), 'Rücksprung ohne JavaScript zeigt die Meldung');
 
 pruefe(fremd.length === 0,`keine Anfrage an fremde Server${fremd.length ? `: ${fremd.slice(0, 3).join(', ')}` : ''}`);
 pruefe(konsole.length === 0, `keine Fehler in der Konsole${konsole.length ? `: ${konsole.slice(0, 3).join(' | ')}` : ''}`);

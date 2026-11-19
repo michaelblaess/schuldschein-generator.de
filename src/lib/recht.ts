@@ -121,20 +121,20 @@ export const DATENSCHUTZ: Zweisprachig = {
   de: {
     titel: 'Datenschutzerklärung',
     beschreibung: 'Datenschutzerklärung von schuldschein-generator.de: Formulareingaben bleiben im Browser, Server-Logs, Speicher nur auf Wunsch.',
-    stand: 'Stand: 18.09.2026',
+    stand: 'Stand: 19.11.2026',
     abschnitte: [
       {
         titel: 'Das Wichtigste zuerst',
         nurOhneZaehlung: true,
         absaetze: [
-          'Was Du in den Generator einträgst, wird ausschließlich in Deinem Browser verarbeitet und nie an diesen Server oder an Dritte geschickt. Auch das PDF entsteht in Deinem Browser. Diese Seite bindet keine Dienste Dritter ein, es gibt keine Reichweitenmessung, keine Werbung und keine Benutzerkonten. Deshalb gibt es auch keinen Einwilligungsbanner: es ist nichts einzuwilligen.',
+          'Was Sie in den Generator eintragen, wird ausschließlich in Ihrem Browser verarbeitet und nie an diesen Server oder an Dritte geschickt. Auch das PDF entsteht in Ihrem Browser. Es gibt keine Reichweitenmessung, keine Werbung und keine Benutzerkonten und deshalb auch keinen Einwilligungsbanner. Was Sie über das Feedback-Formular schicken, wird dagegen gespeichert, siehe Abschnitt "Feedback". Auf der Feedback-Seite lädt das Formular beim ersten Klick Google reCAPTCHA gegen Spam, siehe Abschnitt "Google reCAPTCHA".',
         ],
       },
       {
         titel: 'Das Wichtigste zuerst',
         nurMitZaehlung: true,
         absaetze: [
-          'Was Du in den Generator einträgst, wird ausschließlich in Deinem Browser verarbeitet und nie an diesen Server oder an Dritte geschickt, auch nicht an Google. Auch das PDF entsteht in Deinem Browser. Nur wenn Du zustimmst, misst Google Analytics, welche Seiten besucht und welche Vorlagen heruntergeladen werden und ob ein Schuldschein als PDF gespeichert oder gedruckt wird. Es gibt keine Werbung und keine Benutzerkonten.',
+          'Was Sie in den Generator eintragen, wird ausschließlich in Ihrem Browser verarbeitet und nie an diesen Server oder an Dritte geschickt, auch nicht an Google. Auch das PDF entsteht in Ihrem Browser. Nur wenn Sie zustimmen, misst Google Analytics, welche Seiten besucht und welche Vorlagen heruntergeladen werden und ob ein Schuldschein als PDF gespeichert oder gedruckt wird. Es gibt keine Werbung und keine Benutzerkonten. Was Sie über das Feedback-Formular schicken, wird dagegen gespeichert, siehe Abschnitt "Feedback". Auf der Feedback-Seite lädt das Formular beim ersten Klick Google reCAPTCHA gegen Spam, siehe Abschnitt "Google reCAPTCHA".',
         ],
       },
       {
@@ -144,26 +144,26 @@ export const DATENSCHUTZ: Zweisprachig = {
       {
         titel: 'Hosting und Server-Logdateien',
         absaetze: [
-          `Diese Seite liegt bei ${hoster}. Beim Aufruf speichert der Server automatisch, was Dein Browser übermittelt: IP-Adresse, Datum und Uhrzeit, aufgerufene Adresse, vorher besuchte Seite, Browser und Betriebssystem. Diese Daten braucht der Betrieb für Technik, Sicherheit und Fehlersuche. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO.`,
+          `Diese Seite liegt bei ${hoster}. Beim Aufruf speichert der Server automatisch, was Ihr Browser übermittelt: IP-Adresse, Datum und Uhrzeit, aufgerufene Adresse, vorher besuchte Seite, Browser und Betriebssystem. Diese Daten braucht der Betrieb für Technik, Sicherheit und Fehlersuche. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO.`,
           zaehlungAktiv
-            ? 'Schriften und Bilder liegen auf demselben Server, externe Schriftarten werden nicht nachgeladen. Ein externes Skript lädt die Seite nur nach Deiner Einwilligung, nämlich das von Google Analytics (siehe unten).'
-            : 'Schriften und Bilder liegen auf demselben Server. Externe Schriftarten oder Skripte werden nicht nachgeladen.',
+            ? 'Schriften und Bilder liegen auf demselben Server, externe Schriftarten werden nicht nachgeladen. Externe Skripte lädt die Seite nur in zwei Fällen: Google Analytics nach Ihrer Einwilligung und Google reCAPTCHA auf der Feedback-Seite nach dem ersten Klick in das Formular (siehe unten). Die Feedback-Seite lädt zusätzlich Daten von feedback.michaelblaess.de (siehe Abschnitt "Feedback").'
+            : 'Schriften und Bilder liegen auf demselben Server, externe Schriftarten werden nicht nachgeladen. Ein externes Skript lädt nur die Feedback-Seite, nämlich Google reCAPTCHA nach dem ersten Klick in das Formular (siehe unten). Die Feedback-Seite lädt zusätzlich Daten von feedback.michaelblaess.de (siehe Abschnitt "Feedback").',
         ],
       },
       {
         titel: 'Formulareingaben und PDF',
         absaetze: [
-          'Namen, Anschriften, Beträge und alle anderen Angaben im Generator verlassen Dein Gerät nicht. Die Vorschau, das PDF und der Ausdruck werden vollständig im Browser erzeugt. Es gibt keine Stelle, an der diese Daten auf dem Server ankommen könnten.',
+          'Namen, Anschriften, Beträge und alle anderen Angaben im Generator verlassen Ihr Gerät nicht. Die Vorschau, das PDF und der Ausdruck werden vollständig im Browser erzeugt. Es gibt keine Stelle, an der diese Daten auf dem Server ankommen könnten.',
         ],
       },
       {
         titel: 'Speicher im Browser (Local Storage)',
         absaetze: [
-          'Diese Seite legt nur dann etwas im Speicher Deines Browsers ab, wenn Du es ausdrücklich auslöst:',
+          'Diese Seite legt nur dann etwas im Speicher Ihres Browsers ab, wenn Sie es ausdrücklich auslösen:',
         ],
         liste: [
-          '<code>thema</code>: Deine Wahl hell oder dunkel, erst nachdem Du den Schalter benutzt hast.',
-          '<code>schuldschein-eingaben</code>: Deine Formulareingaben, nur wenn Du das Häkchen "Eingaben auf diesem Gerät merken" setzt. Nimmst Du es wieder heraus oder leerst das Formular, wird der Eintrag gelöscht.',
+          '<code>thema</code>: Ihre Wahl hell oder dunkel, erst nachdem Sie den Schalter benutzt haben.',
+          '<code>schuldschein-eingaben</code>: Ihre Formulareingaben, nur wenn Sie das Häkchen "Eingaben auf diesem Gerät merken" setzen. Nehmen Sie es wieder heraus oder leeren das Formular, wird der Eintrag gelöscht.',
         ],
       },
       {
@@ -171,26 +171,42 @@ export const DATENSCHUTZ: Zweisprachig = {
         nurMitZaehlung: true,
         absaetze: [
           'Der Einwilligungsbanner läuft vollständig auf diesem Server, es wird dafür kein Dienst eines Drittanbieters geladen. Verwendet wird die quelloffene Bibliothek vanilla-cookieconsent.',
-          'Deine Entscheidung wird im Cookie <code>cc_cookie</code> gespeichert, damit die Frage nicht bei jedem Aufruf erneut kommt. Es gilt sechs Monate, enthält keine Kennung Deiner Person und wird nicht übertragen. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO.',
-          'Solange Du nicht zustimmst, wird kein weiteres Cookie gesetzt und keine Verbindung zu Google aufgebaut. Du kannst Deine Entscheidung jederzeit über "Cookie-Einstellungen" unten auf jeder Seite ändern.',
+          'Ihre Entscheidung wird im Cookie <code>cc_cookie</code> gespeichert, damit die Frage nicht bei jedem Aufruf erneut kommt. Es gilt sechs Monate, enthält keine Kennung Ihrer Person und wird nicht übertragen. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO.',
+          'Solange Sie nicht zustimmen, wird Google Analytics nicht geladen und kein Analytics-Cookie gesetzt. Davon unabhängig lädt die Feedback-Seite nach dem ersten Klick in das Formular Google reCAPTCHA, siehe Abschnitt "Google reCAPTCHA". Sie können Ihre Entscheidung jederzeit über "Cookie-Einstellungen" unten auf jeder Seite ändern.',
         ],
       },
       {
         titel: 'Google Analytics',
         nurMitZaehlung: true,
         absaetze: [
-          'Mit Deiner Einwilligung nutzt diese Seite Google Analytics 4 von Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland, um auszuwerten, welche Seiten besucht und welche Vorlagen heruntergeladen werden und ob ein Schuldschein als PDF gespeichert oder gedruckt wird. Das Skript wird erst nach Deiner Zustimmung zur Kategorie Statistik geladen, vorher geht keine Anfrage an Google. Dabei werden die Cookies <code>_ga</code> und <code>_ga_</code> mit der Mess-Kennung gesetzt, die zwei Jahre gelten. Formularinhalte werden nie übermittelt. Google Signale und Werbefunktionen sind abgeschaltet. Rechtsgrundlage ist Art. 6 Abs. 1 lit. a DSGVO, Du kannst die Einwilligung jederzeit widerrufen. Mehr in der <a href="https://policies.google.com/privacy">Datenschutzerklärung von Google</a>.',
+          'Mit Ihrer Einwilligung nutzt diese Seite Google Analytics 4 von Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland, um auszuwerten, welche Seiten besucht und welche Vorlagen heruntergeladen werden und ob ein Schuldschein als PDF gespeichert oder gedruckt wird. Das Skript wird erst nach Ihrer Zustimmung zur Kategorie Statistik geladen, vorher geht keine Anfrage an Google Analytics. Dabei werden die Cookies <code>_ga</code> und <code>_ga_</code> mit der Mess-Kennung gesetzt, die zwei Jahre gelten. Formularinhalte werden nie übermittelt. Google Signale und Werbefunktionen sind abgeschaltet. Rechtsgrundlage ist Art. 6 Abs. 1 lit. a DSGVO, Sie können die Einwilligung jederzeit widerrufen. Mehr in der <a href="https://policies.google.com/privacy">Datenschutzerklärung von Google</a>.',
+        ],
+      },
+      {
+        titel: 'Feedback',
+        absaetze: [
+          'Über die Seite <a href="/feedback/">Feedback</a> können Sie Lob, Fehler und Vorschläge schicken. Das Formular sendet Ihre Angaben an einen eigenen Dienst unter feedback.michaelblaess.de, der ebenfalls bei ALL-INKL in Deutschland liegt und vom selben Verantwortlichen betrieben wird. Gespeichert werden das Datum, die gewählte Art, Ihr Text und, falls angegeben, Ihr Name und Ihre Mailadresse. Ihre IP-Adresse wird nicht gespeichert. Zum Schutz vor Spam wird für einen Tag ein Prüfwert gebildet, der sich nicht auf die IP-Adresse zurückrechnen lässt. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO, das berechtigte Interesse liegt darin, Rückmeldungen zur Seite zu erhalten und Missbrauch abzuwehren.',
+          `Veröffentlicht wird Ihr Text nur, wenn Sie das im Formular ausdrücklich wählen, und erst nach Prüfung. Dann erscheinen Text, Art, Datum und, falls angegeben, Ihr Name auf der Feedback-Seite. Ihre Mailadresse wird nie veröffentlicht. Rechtsgrundlage für die Veröffentlichung ist Ihre Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO, die Sie jederzeit über ${mail} widerrufen können.`,
+          `Alle Einträge werden nach zwölf Monaten automatisch gelöscht, auf Wunsch über ${mail} auch früher. Beim Aufruf der Feedback-Seite lädt Ihr Browser die veröffentlichten Einträge von feedback.michaelblaess.de, beim ersten Klick in das Formular zusätzlich einen Prüfwert gegen Spam. Dabei fallen dort Server-Logdateien an wie im Abschnitt "Hosting und Server-Logdateien" beschrieben.`,
+        ],
+      },
+      {
+        titel: 'Google reCAPTCHA',
+        absaetze: [
+          'Auf der Feedback-Seite lädt Ihr Browser beim ersten Klick in das Formular Google reCAPTCHA v3 von Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. reCAPTCHA prüft, ob eine Einsendung von einem Menschen oder von einem automatisierten Programm stammt. Dafür erhält Google Daten wie Ihre IP-Adresse, Angaben zu Browser und Gerät sowie Informationen zur Nutzung der Seite und kann Cookies setzen oder auslesen, etwa <code>_GRECAPTCHA</code>. Dabei können Daten an die Google LLC in den USA übermittelt werden, die nach dem EU-US Data Privacy Framework zertifiziert ist.',
+          'Der Feedback-Dienst schickt zur Prüfung nur das von reCAPTCHA erzeugte Token an Google, nicht Ihre IP-Adresse.',
+          'Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO, das berechtigte Interesse liegt darin, das Formular vor automatisierten Masseneinsendungen (Spam) zu schützen. Ohne Klick in das Formular lädt die Seite nichts von reCAPTCHA. Mehr in der <a href="https://policies.google.com/privacy">Datenschutzerklärung von Google</a>.',
         ],
       },
       {
         titel: 'E-Mail',
-        absaetze: ['Wenn Du mir schreibst, speichere ich Deine Angaben, um die Anfrage zu beantworten. Sie werden ohne Deine Einwilligung nicht weitergegeben.'],
+        absaetze: ['Wenn Sie mir schreiben, speichere ich Ihre Angaben, um die Anfrage zu beantworten. Sie werden ohne Ihre Einwilligung nicht weitergegeben.'],
       },
       {
-        titel: 'Deine Rechte',
-        absaetze: ['Nach der DSGVO (Art. 15 bis 21 und Art. 77) hast Du das Recht auf:'],
+        titel: 'Ihre Rechte',
+        absaetze: ['Nach der DSGVO (Art. 15 bis 21 und Art. 77) haben Sie das Recht auf:'],
         liste: [
-          'Auskunft über die zu Dir gespeicherten Daten',
+          'Auskunft über die zu Ihnen gespeicherten Daten',
           'Berichtigung unrichtiger Daten',
           'Löschung',
           'Einschränkung der Verarbeitung',
@@ -212,20 +228,20 @@ export const DATENSCHUTZ: Zweisprachig = {
   en: {
     titel: 'Privacy policy',
     beschreibung: 'Privacy policy of schuldschein-generator.de: form entries stay in your browser, server logs, storage only on request.',
-    stand: 'Last updated: 18 September 2026',
+    stand: 'Last updated: 19 November 2026',
     abschnitte: [
       {
         titel: 'The short version',
         nurOhneZaehlung: true,
         absaetze: [
-          'Whatever you enter in the generator is processed only in your browser and never sent to this server or to anyone else. The PDF is created in your browser too. This site embeds no third-party services: there is no audience measurement, no advertising and no user accounts. That is why there is no consent banner either, there is nothing to consent to.',
+          'Whatever you enter in the generator is processed only in your browser and never sent to this server or to anyone else. The PDF is created in your browser too. There is no audience measurement, no advertising and no user accounts, and therefore no consent banner. What you send through the feedback form, however, is stored, see "Feedback". On the feedback page the form loads Google reCAPTCHA against spam on your first click, see "Google reCAPTCHA".',
         ],
       },
       {
         titel: 'The short version',
         nurMitZaehlung: true,
         absaetze: [
-          'Whatever you enter in the generator is processed only in your browser and never sent to this server or to anyone else, Google included. The PDF is created in your browser too. Only if you agree does Google Analytics measure which pages are visited, which templates are downloaded and whether a promissory note is saved as PDF or printed. There is no advertising and there are no user accounts.',
+          'Whatever you enter in the generator is processed only in your browser and never sent to this server or to anyone else, Google included. The PDF is created in your browser too. Only if you agree does Google Analytics measure which pages are visited, which templates are downloaded and whether a promissory note is saved as PDF or printed. There is no advertising and there are no user accounts. What you send through the feedback form, however, is stored, see "Feedback". On the feedback page the form loads Google reCAPTCHA against spam on your first click, see "Google reCAPTCHA".',
         ],
       },
       {
@@ -237,8 +253,8 @@ export const DATENSCHUTZ: Zweisprachig = {
         absaetze: [
           `This site is hosted by ${hoster}, Germany. When a page is requested, the server automatically stores what your browser transmits: IP address, date and time, requested address, referring page, browser and operating system. This is needed for technical operation, security and troubleshooting. The legal basis is Art. 6(1)(f) GDPR.`,
           zaehlungAktiv
-            ? 'Fonts and images are served from the same server, no external fonts are loaded. The only external script is loaded after your consent, namely Google Analytics (see below).'
-            : 'Fonts and images are served from the same server. No external fonts or scripts are loaded.',
+            ? 'Fonts and images are served from the same server, no external fonts are loaded. External scripts are loaded in two cases only: Google Analytics after your consent and Google reCAPTCHA on the feedback page after your first click into the form (see below). The feedback page also loads data from feedback.michaelblaess.de (see "Feedback").'
+            : 'Fonts and images are served from the same server, no external fonts are loaded. Only the feedback page loads an external script, namely Google reCAPTCHA after your first click into the form (see below). The feedback page also loads data from feedback.michaelblaess.de (see "Feedback").',
         ],
       },
       {
@@ -259,14 +275,30 @@ export const DATENSCHUTZ: Zweisprachig = {
         absaetze: [
           'The consent banner runs entirely on this server, no third-party service is loaded for it. It uses the open-source library vanilla-cookieconsent.',
           'Your choice is stored in the cookie <code>cc_cookie</code> so the question does not return on every visit. It lasts six months, holds no identifier of you and is not transmitted. The legal basis is Art. 6(1)(f) GDPR.',
-          'As long as you have not agreed, no further cookie is set and no connection to Google is made. You can change your decision at any time via "Cookie settings" at the bottom of every page.',
+          'As long as you have not agreed, Google Analytics is not loaded and no analytics cookie is set. Independently of this, the feedback page loads Google reCAPTCHA after your first click into the form, see "Google reCAPTCHA". You can change your decision at any time via "Cookie settings" at the bottom of every page.',
         ],
       },
       {
         titel: 'Google Analytics',
         nurMitZaehlung: true,
         absaetze: [
-          'With your consent this site uses Google Analytics 4 by Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland, to see which pages are visited, which templates are downloaded and whether a promissory note is saved as PDF or printed. The script is only loaded after you consent to the statistics category, before that no request goes to Google. It sets the cookies <code>_ga</code> and <code>_ga_</code> followed by the measurement id, lasting two years. Form contents are never transmitted. Google signals and advertising features are switched off. The legal basis is Art. 6(1)(a) GDPR, and you can withdraw consent at any time. See the <a href="https://policies.google.com/privacy">Google privacy policy</a>.',
+          'With your consent this site uses Google Analytics 4 by Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland, to see which pages are visited, which templates are downloaded and whether a promissory note is saved as PDF or printed. The script is only loaded after you consent to the statistics category, before that no request goes to Google Analytics. It sets the cookies <code>_ga</code> and <code>_ga_</code> followed by the measurement id, lasting two years. Form contents are never transmitted. Google signals and advertising features are switched off. The legal basis is Art. 6(1)(a) GDPR, and you can withdraw consent at any time. See the <a href="https://policies.google.com/privacy">Google privacy policy</a>.',
+        ],
+      },
+      {
+        titel: 'Feedback',
+        absaetze: [
+          'On the <a href="/en/feedback/">feedback</a> page you can send praise, bug reports and suggestions. The form sends your details to a separate service at feedback.michaelblaess.de, which is also hosted by ALL-INKL in Germany and run by the same controller. We store the date, the type you chose, your text and, if given, your name and email address. Your IP address is not stored. To protect against spam, a check value is formed for one day that cannot be traced back to the IP address. The legal basis is Art. 6(1)(f) GDPR, the legitimate interest being to receive feedback on the site and to prevent abuse.',
+          `Your text is only published if you explicitly choose that in the form, and only after review. Then the text, type, date and, if given, your name appear on the feedback page. Your email address is never published. The legal basis for publication is your consent under Art. 6(1)(a) GDPR, which you can withdraw at any time via ${mail}.`,
+          `All entries are deleted automatically after twelve months, or earlier on request via ${mail}. When you open the feedback page, your browser loads the published entries from feedback.michaelblaess.de, and on the first click into the form also a spam check value. Server log files are created there as described under "Hosting and server log files".`,
+        ],
+      },
+      {
+        titel: 'Google reCAPTCHA',
+        absaetze: [
+          'On the feedback page, your browser loads Google reCAPTCHA v3 by Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland, on your first click into the form. reCAPTCHA checks whether a submission comes from a human or from an automated program. For this, Google receives data such as your IP address, browser and device information and information about how you use the page, and may set or read cookies such as <code>_GRECAPTCHA</code>. Data may be transferred to Google LLC in the USA, which is certified under the EU-US Data Privacy Framework.',
+          'For verification, the feedback service sends only the token created by reCAPTCHA to Google, not your IP address.',
+          'The legal basis is Art. 6(1)(f) GDPR, the legitimate interest being to protect the form against automated mass submissions (spam). Without a click into the form, nothing from reCAPTCHA is loaded. See the <a href="https://policies.google.com/privacy">Google privacy policy</a>.',
         ],
       },
       {

@@ -1,0 +1,207 @@
+---
+import { FEEDBACK_API, FEEDBACK_SITE, NAME_MAX, RECAPTCHA_SITEKEY, TEXT_MAX, TEXT_MIN, type FeedbackTexte } from '../lib/feedback';
+import { DOMAIN, PFADE, type Sprache } from '../lib/i18n';
+
+interface Props {
+  sprache: Sprache;
+}
+const { sprache } = Astro.props;
+const de = sprache === 'de';
+const T = de
+  ? {
+      titel: 'Feedback',
+      lead: 'Lob, Fehler oder eine Idee für den Schuldschein-Generator? Schreib es hier.',
+      kopf: 'Feedback an schuldschein-generator.de',
+      worum: 'Worum geht es?',
+      lob: 'Lob',
+      fehler: 'Fehler',
+      vorschlag: 'Vorschlag',
+      text: 'Dein Feedback',
+      textHilfe: '10 bis 2.000 Zeichen. Bitte keine Daten anderer Personen und keine Vertragsdaten.',
+      name: 'Name',
+      nameHilfe: 'Freiwillig, erscheint bei Veröffentlichung.',
+      mail: 'Mail',
+      mailHilfe: 'Freiwillig, nur für Rückfragen, wird nie veröffentlicht.',
+      oeffentlich: 'Darf Dein Feedback hier erscheinen?',
+      ja: 'Ja, nach Prüfung',
+      nein: 'Nein, nur an den Betreiber',
+      hinweisTitel: 'Bevor Du absendest:',
+      hinweisVor: 'Dein Feedback wird in einer Datenbank gespeichert, auf dem Server von feedback.michaelblaess.de beim Webhoster ALL-INKL in Deutschland. Gespeichert werden das Datum, die gewählte Art, Dein Text und, falls angegeben, Dein Name und Deine Mailadresse. Nach zwölf Monaten wird alles automatisch gelöscht. Deine IP-Adresse wird nicht gespeichert, nur ein Prüfwert gegen Spam, der sich nicht zurückrechnen lässt und nach einem Tag verfällt. Veröffentlicht wird Dein Text nur, wenn Du das oben ausgewählt hast, und erst nach Prüfung. Deine Mailadresse erscheint nie. Löschen lassen kannst Du Dein Feedback jederzeit über die Adresse im ',
+      hinweisLink: 'Impressum',
+      hinweisNach: '.',
+      recaptchaVor: ' Zum Schutz vor Spam lädt das Formular beim ersten Klick Google reCAPTCHA, Details in der ',
+      recaptchaLink: 'Datenschutzerklärung',
+      recaptchaNach: '.',
+      googleVor: 'Diese Seite ist durch reCAPTCHA geschützt. Es gelten die ',
+      googlePrivacy: 'Datenschutzerklärung',
+      googleMitte: ' und die ',
+      googleTerms: 'Nutzungsbedingungen',
+      googleNach: ' von Google.',
+      hinweisSchluss: 'Wenn Du damit nicht einverstanden bist, schick das Formular bitte nicht ab.',
+      honig: 'Webseite (bitte leer lassen)',
+      liste: 'Was andere geschrieben haben',
+      leer: 'Noch keine veröffentlichten Einträge. Schreib den ersten.',
+      ladefehler: 'Die Einträge lassen sich gerade nicht laden.',
+    }
+  : {
+      titel: 'Feedback',
+      lead: 'Praise, a bug or an idea for the Schuldschein-Generator? Write it here.',
+      kopf: 'Feedback to schuldschein-generator.de',
+      worum: 'What is it about?',
+      lob: 'Praise',
+      fehler: 'Bug',
+      vorschlag: 'Suggestion',
+      text: 'Your feedback',
+      textHilfe: '10 to 2,000 characters. Please no data about other people and no contract details.',
+      name: 'Name',
+      nameHilfe: 'Optional, shown if published.',
+      mail: 'Email',
+      mailHilfe: 'Optional, only for questions, never published.',
+      oeffentlich: 'May your feedback appear here?',
+      ja: 'Yes, after review',
+      nein: 'No, only to the site owner',
+      hinweisTitel: 'Before you send:',
+      hinweisVor: 'Your feedback is stored in a database on the server of feedback.michaelblaess.de, hosted by ALL-INKL in Germany. We store the date, the type you chose, your text and, if given, your name and email address. Everything is deleted automatically after twelve months. Your IP address is not stored, only a spam check value that cannot be reversed and expires after one day. Your text is only published if you chose that above, and only after review. Your email address is never shown. You can have your feedback deleted at any time via the address in the ',
+      hinweisLink: 'legal notice',
+      hinweisNach: '.',
+      recaptchaVor: ' To protect against spam, the form loads Google reCAPTCHA on your first click, see the ',
+      recaptchaLink: 'privacy policy',
+      recaptchaNach: ' for details.',
+      googleVor: 'This site is protected by reCAPTCHA and the Google ',
+      googlePrivacy: 'Privacy Policy',
+      googleMitte: ' and ',
+      googleTerms: 'Terms of Service',
+      googleNach: ' apply.',
+      hinweisSchluss: 'If you do not agree, please do not send the form.',
+      honig: 'Website (please leave empty)',
+      liste: 'What others wrote',
+      leer: 'No published entries yet. Be the first.',
+      ladefehler: 'The entries cannot be loaded right now.',
+    };
+
+// Nur was das Skript zur Laufzeit braucht, als JSON am Formular
+const texte: FeedbackTexte = de
+  ? {
+      arten: { lob: T.lob, fehler: T.fehler, vorschlag: T.vorschlag },
+      zahlEins: '1 Eintrag',
+      zahlViele: '{n} Einträge',
+      senden: 'Einverstanden, absenden',
+      sendet: 'Wird gesendet',
+      gesendet: 'Danke, Dein Feedback ist angekommen. Wenn Du der Veröffentlichung zugestimmt hast, erscheint es nach der Prüfung hier.',
+      zuViele: 'Zu viele Einsendungen in kurzer Zeit. Bitte versuch es in einer Stunde noch einmal.',
+      fehler: 'Das Senden hat nicht geklappt. Bitte versuch es später noch einmal.',
+      feld: {
+        textlaenge: 'Bitte schreib zwischen 10 und 2.000 Zeichen.',
+        mail: 'Diese Mailadresse sieht nicht gültig aus.',
+        art: 'Bitte wähle, worum es geht.',
+        oeffentlich: 'Bitte wähle, ob Dein Feedback erscheinen darf.',
+        namelaenge: 'Der Name darf höchstens 200 Zeichen lang sein.',
+        site: 'Das Senden hat nicht geklappt. Bitte versuch es später noch einmal.',
+      },
+    }
+  : {
+      arten: { lob: T.lob, fehler: T.fehler, vorschlag: T.vorschlag },
+      zahlEins: '1 entry',
+      zahlViele: '{n} entries',
+      senden: 'Agree and send',
+      sendet: 'Sending',
+      gesendet: 'Thanks, your feedback has arrived. If you agreed to publication, it will appear here after review.',
+      zuViele: 'Too many submissions in a short time. Please try again in an hour.',
+      fehler: 'Sending did not work. Please try again later.',
+      feld: {
+        textlaenge: 'Please write between 10 and 2,000 characters.',
+        mail: 'This email address does not look valid.',
+        art: 'Please choose what it is about.',
+        oeffentlich: 'Please choose whether your feedback may appear.',
+        namelaenge: 'The name may be at most 200 characters long.',
+        site: 'Sending did not work. Please try again later.',
+      },
+    };
+const zurueck = `${DOMAIN}${PFADE.feedback[sprache]}`;
+---
+<h1 class="seite-titel">{T.titel}</h1>
+<p class="lead">{T.lead}</p>
+
+<div class="feedback-raster">
+<form class="beleg feedback-beleg" id="feedback" method="post" action={FEEDBACK_API.senden}
+  aria-label={T.kopf} data-sprache={sprache} data-recaptcha={RECAPTCHA_SITEKEY} data-texte={JSON.stringify(texte)}>
+  <div class="kopfzeile" aria-hidden="true"><span>{T.kopf}</span></div>
+  <input type="hidden" name="site" value={FEEDBACK_SITE} />
+  <input type="hidden" name="sprache" value={sprache} />
+  <input type="hidden" name="zurueck" value={zurueck} />
+  <input type="hidden" name="stempel" id="fb-stempel" value="" />
+
+  <div class="feld">
+    <span class="label" id="fb-l-art">{T.worum}</span>
+    <div class="wahl" role="radiogroup" aria-labelledby="fb-l-art" aria-describedby="fb-art-fehler" id="fb-art">
+      <label><input type="radio" name="art" value="lob" required /><span>{T.lob}</span></label>
+      <label><input type="radio" name="art" value="fehler" /><span>{T.fehler}</span></label>
+      <label><input type="radio" name="art" value="vorschlag" /><span>{T.vorschlag}</span></label>
+    </div>
+    <div class="fehler" id="fb-art-fehler" hidden></div>
+  </div>
+
+  <div class="feld">
+    <label for="fb-text">{T.text}</label>
+    <textarea id="fb-text" name="text" required minlength={TEXT_MIN} maxlength={TEXT_MAX}
+      aria-describedby="fb-text-hilfe fb-text-fehler"></textarea>
+    <p class="hilfe" id="fb-text-hilfe">{T.textHilfe}</p>
+    <div class="fehler" id="fb-text-fehler" hidden></div>
+  </div>
+
+  <div class="reihe">
+    <div class="feld">
+      <label for="fb-name">{T.name}</label>
+      <input id="fb-name" name="name" maxlength={NAME_MAX} autocomplete="name" aria-describedby="fb-name-hilfe fb-name-fehler" />
+      <p class="hilfe" id="fb-name-hilfe">{T.nameHilfe}</p>
+      <div class="fehler" id="fb-name-fehler" hidden></div>
+    </div>
+    <div class="feld">
+      <label for="fb-mail">{T.mail}</label>
+      <input id="fb-mail" name="mail" type="email" autocomplete="email" spellcheck="false" aria-describedby="fb-mail-hilfe fb-mail-fehler" />
+      <p class="hilfe" id="fb-mail-hilfe">{T.mailHilfe}</p>
+      <div class="fehler" id="fb-mail-fehler" hidden></div>
+    </div>
+  </div>
+
+  <div class="feld">
+    <span class="label" id="fb-l-oeffentlich">{T.oeffentlich}</span>
+    <div class="wahl" role="radiogroup" aria-labelledby="fb-l-oeffentlich" aria-describedby="fb-oeffentlich-fehler" id="fb-oeffentlich">
+      <label><input type="radio" name="oeffentlich" value="ja" required /><span>{T.ja}</span></label>
+      <label><input type="radio" name="oeffentlich" value="nein" checked /><span>{T.nein}</span></label>
+    </div>
+    <div class="fehler" id="fb-oeffentlich-fehler" hidden></div>
+  </div>
+
+  <div class="honig" aria-hidden="true">
+    <label for="fb-webseite">{T.honig}</label>
+    <input id="fb-webseite" name="webseite" type="text" tabindex="-1" autocomplete="off" />
+  </div>
+
+  <div class="haftung gross feedback-hinweis" role="note">
+    <b>{T.hinweisTitel}</b>
+    <span>{T.hinweisVor}<a href={PFADE.impressum[sprache]}>{T.hinweisLink}</a>{T.hinweisNach}<span data-recaptcha-hinweis hidden>{T.recaptchaVor}<a href={PFADE.datenschutz[sprache]}>{T.recaptchaLink}</a>{T.recaptchaNach}</span></span>
+    <b class="zustimmung">{T.hinweisSchluss}</b>
+  </div>
+
+  <button class="knopf" type="submit" id="fb-senden">{texte.senden}</button>
+  <p class="hilfe recaptcha-hinweis" data-recaptcha-hinweis hidden>{T.googleVor}<a href="https://policies.google.com/privacy" rel="noopener">{T.googlePrivacy}</a>{T.googleMitte}<a href="https://policies.google.com/terms" rel="noopener">{T.googleTerms}</a>{T.googleNach}</p>
+  <p class="feedback-meldung" id="fb-meldung" role="status" aria-live="polite" tabindex="-1" hidden></p>
+</form>
+
+<section class="feedback-liste" id="eintraege" aria-labelledby="h-eintraege" hidden>
+  <div class="kopfzeile">
+    <h2 id="h-eintraege">{T.liste}</h2>
+    <span class="feedback-zahl" id="eintraege-zahl" hidden></span>
+  </div>
+  <p class="feedback-leer" id="eintraege-leer" hidden>{T.leer}</p>
+  <p class="feedback-leer" id="eintraege-fehler" hidden>{T.ladefehler}</p>
+  <div class="feedback-linien" id="eintraege-linien" aria-hidden="true" hidden><span></span><span></span><span></span></div>
+  <ul class="urteile" id="eintraege-liste" hidden></ul>
+</section>
+</div>
+
+<script>
+  import { starteFeedback } from '../scripts/feedback';
+  starteFeedback();
+</script>

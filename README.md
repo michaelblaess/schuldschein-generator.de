@@ -30,7 +30,7 @@ Live at **[schuldschein-generator.de](https://schuldschein-generator.de)**, in G
 - **The law**: statutes by topic and 12 court decisions, each checked in full on 18.09.2026, with case numbers and links.
 - **FAQ** with the legal basis for every answer, also as structured data.
 - **Light and dark**, follows the system until you choose.
-- **Privacy by construction:** entries are only stored if you tick "remember", the theme only after you click the switch, the language lives in the URL. Google Analytics is only built in with a measurement id and only loads after consent.
+- **Privacy by construction:** entries are only stored if you tick "remember", the theme only after you click the switch, the language lives in the URL. Google Analytics is only built in with a measurement id and only loads after consent. Google reCAPTCHA only loads on the feedback page, on the first click into the form.
 
 ## Screenshots
 
@@ -54,6 +54,12 @@ tests/          vitest for the pure functions
 tools/          smoke test, accessibility check, icon and share image generator
 docs/           design drafts, code review of the old version, legal research
 ```
+
+## Feedback
+
+At `/feedback/` visitors can leave praise, bug reports and suggestions. The form in this repo sends entries to a separate service at `feedback.michaelblaess.de`, which also serves the feedback forms of two other sites. Its source code is deliberately not public. The reason is spam protection: anyone who knows the rules by which an entry is accepted, flagged or dropped can work around them on purpose. That is why neither the rules nor their thresholds are described here.
+
+Only the form and the display of approved entries are public. In addition, Google reCAPTCHA v3 protects the form. It loads only on the first click into the form, never when a page is merely opened. What is stored and for how long is described in the site's privacy policy.
 
 ## Development
 

@@ -290,6 +290,38 @@
   .rechtstext ul { list-style: disc; padding-left: 22px; margin: 0 0 10px; }
 
   .fehlerseite { text-align: left; max-width: 60ch; }
+
+  /* Feedback: ein zweiter, kleinerer Beleg */
+  .feedback-raster { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 40px; align-items: start; }
+  .feedback-beleg > .feld { margin-bottom: 14px; }
+  .feedback-beleg .feld textarea { height: 160px; }
+  .feld textarea[aria-invalid="true"] { border-width: 2px; box-shadow: inset 0 0 0 1px var(--rot); }
+  .wahl[aria-invalid="true"] { border-width: 2px; }
+  .feedback-beleg .reihe { margin-bottom: 14px; }
+  .feedback-hinweis { margin: 18px 0 14px; }
+  .feedback-hinweis > span { display: block; margin: 6px 0 8px; font-size: 16px; line-height: 1.45; }
+  .feedback-hinweis a { color: inherit; }
+  .feedback-hinweis b.zustimmung { font-size: 17px; }
+  .feedback-meldung { margin: 12px 0 0; padding: 10px 14px; background: var(--weiss); border: 1px solid var(--rot); font-weight: 600; }
+  .feedback-meldung[data-art="fehler"] { color: var(--rot); }
+  .recaptcha-hinweis { margin: 8px 0 0; font-size: 14px; }
+  .recaptcha-hinweis a { color: inherit; }
+  /* reCAPTCHA-Badge: von Google erlaubt ausgeblendet, solange der Pflichttext unter dem Knopf steht */
+  .grecaptcha-badge { visibility: hidden; }
+  .honig { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  /* Rechts ein weisses Blatt als Gegenstueck zum Beleg: gleicher Rahmen, gleiche Kopfzeile */
+  .feedback-liste { background: var(--weiss); border: 2px solid var(--rot); padding: 14px 16px 16px; }
+  .feedback-liste .kopfzeile { align-items: baseline; }
+  .feedback-liste .kopfzeile h2 { font: inherit; margin: 0; color: inherit; }
+  .feedback-zahl { font: 500 13px var(--font-mono); color: var(--grau); white-space: nowrap; }
+  .feedback-leer { color: var(--grau); margin: 0; }
+  .feedback-linien span { display: block; height: 32px; border-bottom: 1px solid var(--linie); }
+  .feedback-liste .urteile { gap: 0; }
+  .feedback-liste .urteil { border: 0; padding: 12px 0; }
+  .feedback-liste .urteil + .urteil { border-top: 1px solid var(--linie); }
+  .feedback-liste .urteil:first-child { padding-top: 0; }
+  .feedback-liste .urteil:last-child { padding-bottom: 0; }
+  .feedback-eintrag p { white-space: pre-line; margin: 4px 0 0; overflow-wrap: anywhere; }
 }
 
 @media (min-width: 1100px) {
@@ -298,8 +330,12 @@
   .ausgabe .vorschau { margin-top: 0; }
 }
 
+@media (min-width: 961px) {
+  .feedback-liste { position: sticky; top: 16px; }
+}
+
 @media (max-width: 960px) {
-  .spalten, .gruppen { grid-template-columns: 1fr; }
+  .spalten, .gruppen, .feedback-raster { grid-template-columns: 1fr; }
   .kurzfassung ul { grid-template-columns: 1fr; }
 }
 
