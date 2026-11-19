@@ -10,6 +10,25 @@ import { betragInWorten } from '../lib/zahlwort';
 
 const SPEICHER = 'schuldschein-eingaben';
 
+/** Namen der Analytics-Ereignisse für die beiden Ausgabewege des Generators. */
+const ANALYTICS_EREIGNIS = {
+  pdf: 'schuldschein_pdf',
+  drucken: 'schuldschein_drucken',
+} as const;
+
+/**
+ * Meldet ein Ereignis an Google Analytics, falls das Skript nach der Einwilligung geladen ist.
+ * Ohne Einwilligung existiert `window.gtag` nicht, dann passiert nichts.
+ * Es gehen bewusst keine Parameter mit: Der Dateiname enthält den Namen des Darlehensnehmers.
+ * @param name Name des Ereignisses aus {@link ANALYTICS_EREIGNIS}.
+ */
+function meldeEreignis(name: string): void {
+  const gtag = (window as unknown as { gtag?: (...argumente: unknown[]) => void }).gtag;
+  if (typeof gtag === 'function') {
+    gtag('event', name);
+  }
+}
+
 /** Alle Felder, die gemerkt werden koennen. Radios und Haekchen werden gesondert behandelt. */
 const TEXTFELDER = [
   'geber_name', 'nehmer_name', 'geber_adresse', 'nehmer_adresse', 'summe', 'zurueck', 'zinssatz', 'rhythmus', 'erste',
@@ -236,7 +255,11 @@ export function starteGenerator(): void {
     feld('geber_name').focus();
   });
 
-  document.getElementById('drucken')?.addEventListener('click', () => window.print());
+  document.getElementById('drucken')?.addEventListener('click', () => {
+    // Vor print() melden: der Dialog blockiert das Skript, bis er geschlossen ist
+    meldeEreignis(ANALYTICS_EREIGNIS.drucken);
+    window.print();
+  });
 
   const pdfKnopf = document.getElementById('pdf') as HTMLButtonElement | null;
   pdfKnopf?.addEventListener('click', async () => {
@@ -261,6 +284,7 @@ export function starteGenerator(): void {
       a.click();
       a.remove();
       setTimeout(() => URL.revokeObjectURL(url), 5000);
+      meldeEreignis(ANALYTICS_EREIGNIS.pdf);
     } finally {
       pdfKnopf.disabled = false;
       pdfKnopf.textContent = pdfKnopf.dataset.text ?? '';

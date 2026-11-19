@@ -134,7 +134,7 @@ export const DATENSCHUTZ: Zweisprachig = {
         titel: 'Das Wichtigste zuerst',
         nurMitZaehlung: true,
         absaetze: [
-          'Was Du in den Generator einträgst, wird ausschließlich in Deinem Browser verarbeitet und nie an diesen Server oder an Dritte geschickt, auch nicht an Google. Auch das PDF entsteht in Deinem Browser. Nur wenn Du zustimmst, misst Google Analytics, welche Seiten besucht werden. Es gibt keine Werbung und keine Benutzerkonten.',
+          'Was Du in den Generator einträgst, wird ausschließlich in Deinem Browser verarbeitet und nie an diesen Server oder an Dritte geschickt, auch nicht an Google. Auch das PDF entsteht in Deinem Browser. Nur wenn Du zustimmst, misst Google Analytics, welche Seiten besucht und welche Vorlagen heruntergeladen werden und ob ein Schuldschein als PDF gespeichert oder gedruckt wird. Es gibt keine Werbung und keine Benutzerkonten.',
         ],
       },
       {
@@ -179,7 +179,7 @@ export const DATENSCHUTZ: Zweisprachig = {
         titel: 'Google Analytics',
         nurMitZaehlung: true,
         absaetze: [
-          'Mit Deiner Einwilligung nutzt diese Seite Google Analytics 4 von Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland, um auszuwerten, welche Seiten besucht werden. Das Skript wird erst nach Deiner Zustimmung zur Kategorie Statistik geladen, vorher geht keine Anfrage an Google. Dabei werden die Cookies <code>_ga</code> und <code>_ga_</code> mit der Mess-Kennung gesetzt, die zwei Jahre gelten. Formularinhalte werden nie übermittelt. Google Signale und Werbefunktionen sind abgeschaltet. Rechtsgrundlage ist Art. 6 Abs. 1 lit. a DSGVO, Du kannst die Einwilligung jederzeit widerrufen. Mehr in der <a href="https://policies.google.com/privacy">Datenschutzerklärung von Google</a>.',
+          'Mit Deiner Einwilligung nutzt diese Seite Google Analytics 4 von Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland, um auszuwerten, welche Seiten besucht und welche Vorlagen heruntergeladen werden und ob ein Schuldschein als PDF gespeichert oder gedruckt wird. Das Skript wird erst nach Deiner Zustimmung zur Kategorie Statistik geladen, vorher geht keine Anfrage an Google. Dabei werden die Cookies <code>_ga</code> und <code>_ga_</code> mit der Mess-Kennung gesetzt, die zwei Jahre gelten. Formularinhalte werden nie übermittelt. Google Signale und Werbefunktionen sind abgeschaltet. Rechtsgrundlage ist Art. 6 Abs. 1 lit. a DSGVO, Du kannst die Einwilligung jederzeit widerrufen. Mehr in der <a href="https://policies.google.com/privacy">Datenschutzerklärung von Google</a>.',
         ],
       },
       {
@@ -225,7 +225,7 @@ export const DATENSCHUTZ: Zweisprachig = {
         titel: 'The short version',
         nurMitZaehlung: true,
         absaetze: [
-          'Whatever you enter in the generator is processed only in your browser and never sent to this server or to anyone else, Google included. The PDF is created in your browser too. Only if you agree does Google Analytics measure which pages are visited. There is no advertising and there are no user accounts.',
+          'Whatever you enter in the generator is processed only in your browser and never sent to this server or to anyone else, Google included. The PDF is created in your browser too. Only if you agree does Google Analytics measure which pages are visited, which templates are downloaded and whether a promissory note is saved as PDF or printed. There is no advertising and there are no user accounts.',
         ],
       },
       {
@@ -266,7 +266,7 @@ export const DATENSCHUTZ: Zweisprachig = {
         titel: 'Google Analytics',
         nurMitZaehlung: true,
         absaetze: [
-          'With your consent this site uses Google Analytics 4 by Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland, to see which pages are visited. The script is only loaded after you consent to the statistics category, before that no request goes to Google. It sets the cookies <code>_ga</code> and <code>_ga_</code> followed by the measurement id, lasting two years. Form contents are never transmitted. Google signals and advertising features are switched off. The legal basis is Art. 6(1)(a) GDPR, and you can withdraw consent at any time. See the <a href="https://policies.google.com/privacy">Google privacy policy</a>.',
+          'With your consent this site uses Google Analytics 4 by Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland, to see which pages are visited, which templates are downloaded and whether a promissory note is saved as PDF or printed. The script is only loaded after you consent to the statistics category, before that no request goes to Google. It sets the cookies <code>_ga</code> and <code>_ga_</code> followed by the measurement id, lasting two years. Form contents are never transmitted. Google signals and advertising features are switched off. The legal basis is Art. 6(1)(a) GDPR, and you can withdraw consent at any time. See the <a href="https://policies.google.com/privacy">Google privacy policy</a>.',
         ],
       },
       {
